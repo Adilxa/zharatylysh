@@ -1,0 +1,70 @@
+.container {
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    .filterWrap {
+      display: flex;
+      gap: 1rem;
+      .btn {
+        color: black;
+        display: inline-block;
+        transition: color 0.2s ease;
+        position: relative;
+        font-size: 14px;
+
+        &:hover,
+        &.active {
+          &::before {
+            width: 100%;
+            left: 100;
+          }
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: calc(100% + 6%);
+          width: 0;
+          right: 0;
+          height: 3px;
+        }
+
+        &::before {
+          transition: width 0.2s cubic-bezier(0.51, 0.18, 0, 0.88);
+          background: #2e325a;
+          left: 0;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      h1 {
+        font-size: large;
+        font-weight: 600;
+        // text-align: center;
+      }
+      .wrapper {
+        width: 100%;
+
+        .filterWrap {
+        }
+      }
+    }
+  }
+}

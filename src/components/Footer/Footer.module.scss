@@ -1,0 +1,248 @@
+.footer {
+  width: 100%;
+  padding: 40px 162px 40px 56px;
+  border-top: 1px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  transition: ease-in-out 0.3s;
+  background: white;
+
+  .card {
+    position: relative;
+
+    h1 {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: #2e325a;
+      margin-bottom: 14px;
+    }
+
+    #hiden {
+      display: none;
+    }
+
+    .desc {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 26px;
+      color: #6f6f6f;
+      width: 370px;
+      height: 78px;
+      overflow: hidden;
+      transition: ease 0.3s;
+    }
+
+    .descAc {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 26px;
+      color: #6f6f6f;
+      width: 370px;
+      height: fit-content;
+      transition: ease-in-out 0.3s;
+    }
+
+    .second {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      div {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #6f6f6f;
+        gap: 5px;
+
+        p {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: #333333;
+        }
+      }
+    }
+
+    .thirth {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+
+      a {
+        border: 1px solid #2e325a;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: #2e325a;
+          border: 1px solid #ffffff;
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+          border-radius: 100px;
+
+          img {
+            border: 1px solid #ffffff;
+            filter: invert(100%);
+            border: none;
+            -webkit-filter: invert(100%);
+          }
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+.underFooter {
+  width: 100%;
+  padding: 20px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+
+  p {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #333333;
+  }
+}
+
+.read {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 26px;
+  text-decoration-line: underline;
+  color: #333333;
+  cursor: pointer;
+  width: fit-content;
+  transition: ease-in-out 0.3s;
+  margin-left: 10px;
+}
+
+@media (max-width: 1280px) {
+  .footer {
+    padding: 30px 24px;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer {
+    flex-direction: column;
+    gap: 60px;
+
+    .card {
+      #hidenBefor {
+        display: none;
+      }
+
+      #hiden {
+        display: block;
+      }
+
+      .second {
+        &::before {
+          position: absolute;
+          content: "";
+          top: -32px;
+          left: 0;
+          height: 1px;
+          background-color: #c7c7c7;
+          width: 430px;
+        }
+
+        &::after {
+          position: absolute;
+          content: "";
+          bottom: -32px;
+          left: 0;
+          height: 1px;
+          background-color: #c7c7c7;
+          width: 430px;
+        }
+      }
+    }
+  }
+
+  .underFooter {
+    padding: 15px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .rights {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (max-width: 474px) {
+  .footer {
+    .card {
+      .desc {
+        width: 100%;
+      }
+
+      .second {
+        &::before {
+          width: 318px;
+        }
+
+        &::after {
+          width: 318px;
+        }
+      }
+    }
+  }
+
+  .read {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .footer {
+    .card {
+      .second {
+        &::before {
+          width: 300px;
+        }
+
+        &::after {
+          width: 300px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 340px) {
+  .footer {
+    .card {
+      .second {
+        &::before {
+          width: 240px;
+        }
+
+        &::after {
+          width: 240px;
+        }
+      }
+    }
+  }
+}
