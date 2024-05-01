@@ -14,16 +14,6 @@ export const HeaderLinks = [
     title: "Travel stories",
     link: "travel",
   },
-  {
-    id: 4,
-    title: "Sign Up",
-    link: "signup",
-  },
-  {
-    id: 5,
-    title: "Sign in",
-    link: "signin",
-  },
 ];
 
 export const MainLinks = [

@@ -304,6 +304,9 @@
 }
 
 @media (max-width: 768px) {
+  .hideEmail {
+    display: none;
+  }
   .nonActive,
   .renderNonActive {
     border-bottom: none;

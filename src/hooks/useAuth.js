@@ -11,8 +11,8 @@ const useAuth = () => {
     const res = localStorage.getItem("key");
 
     if (res) {
+      router.push("/");
       setAuth(true);
-      router.replace("/");
     } else {
       setAuth(false);
       router.push("signin");
@@ -22,26 +22,32 @@ const useAuth = () => {
   const SignIn = async ({ email, password, role }) => {
     setLoading(true);
     try {
-      const res = await AuthService.login(email, password, role)
-        .then((res) => localStorage.setItem("key", res.data.id))
-        .finally(() => router.replace("/"));
-
+      const res = await AuthService.login(email, password, role).then((res) =>
+        localStorage.setItem("key", res.data.id)
+      );
+      router.push("/");
+      setAuth(true);
       return res;
     } catch (e) {}
   };
 
   const SignUp = async ({ email, password, role }) => {
     setLoading(true);
-
     try {
-      const res = await AuthService.signUp(email, password, role)
-        .then((res) => localStorage.setItem("key", res.data.id))
-        .finally(() => router.replace("/"));
-
+      const res = await AuthService.signUp(email, password, role).then((res) =>
+        localStorage.setItem("key", res.data.id)
+      );
+      router.push("/");
+      setAuth(true);
       return res;
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const LogOut = async () => {
+    localStorage.removeItem("key");
+    checkAuth();
   };
 
   return {
@@ -50,6 +56,7 @@ const useAuth = () => {
     checkAuth,
     SignIn,
     SignUp,
+    LogOut,
   };
 };
 

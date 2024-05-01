@@ -1,5 +1,5 @@
 "use client"
-import React, { SetStateAction, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import scss from "./Header.module.scss";
 import Link from "next/link";
 import { HeaderLinks } from "../../constants/HeaderConsts";
@@ -7,16 +7,35 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import menu from '../../public/assets/svg/menu.svg';
 import close from '../../public/assets/svg/close.svg';
-import { footerConsts } from "../../constants/Footer";
-
+import useUser from "@/hooks/useUser";
+import Preloader from "../Preloader";
+import useAuth from "@/hooks/useAuth";
 
 const Header = ({ isMain = false }) => {
     const [isActive, setActive] = useState(false);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [user, setUser] = useState(null)
+
+
     const router = useRouter();
     const currentRoute = router.pathname;
 
+    const { getMe } = useUser();
+    const { LogOut } = useAuth()
+
+
+    const getUser = async () => {
+        setOpenModal(false)
+        const res = await getMe();
+        setUser(res)
+    }
+
+    const userId = localStorage.getItem("key")
+
+    useEffect(() => {
+        getUser()
+    }, [userId])
 
     const handleScroll = useCallback(() => {
         if (window.scrollY > 50) {
@@ -26,12 +45,14 @@ const Header = ({ isMain = false }) => {
         }
     }, []);
 
+
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
 
     useEffect(() => {
         if (openModal) {
@@ -47,6 +68,7 @@ const Header = ({ isMain = false }) => {
 
     const renderLinks = React.useMemo(
         () =>
+
             HeaderLinks.map((item) => (
                 <Link
                     className={currentRoute == `/${item.link}` ? scss.activeLink : ""}
@@ -55,7 +77,10 @@ const Header = ({ isMain = false }) => {
                 >
                     {item.title}
                 </Link>
-            )),
+            ))
+
+
+        ,
         []
     );
 
@@ -71,7 +96,14 @@ const Header = ({ isMain = false }) => {
                 <h1 style={{ color: "#000" }}>Zharatylysh</h1>
             </Link>
             <nav>{renderLinks}</nav>
-            <div></div>
+            <div style={{ display: "flex", alignItems: "end", gap: "15px", fontSize: "15px" }}>
+                <div className={scss.hideEmail}>
+                    {user ? <Link href="/profile">{user.email}</Link> :
+                        <div style={{ display: "flex", alignItems: "end", gap: "15px", fontSize: "15px" }}><Link href="/signup">Sign Up
+                        </Link><Link href="/signin">Sign in</Link>
+                        </div>}
+                </div>
+            </div>
             <div className={scss.dynamic_burger}>
                 <div className={scss.menu_burger}>
                     <div onClick={click}>
@@ -89,16 +121,24 @@ const Header = ({ isMain = false }) => {
                             </div>
                             <div className={scss.titleLink}>
                                 <div className={scss.pagesMain}>
+                                    {user ? <Link href="/profile">{user.email}</Link> :
+                                        <div style={{ display: "flex", flexDirection: "column", fontSize: "14px", paddingLeft: "8px" }}><Link href="/signup">Sign Up
+                                        </Link>
+                                            <hr className={scss.border} />
+                                            <Link href="/signin">Sign in</Link>
+                                        </div>}
+                                    <hr className={scss.border} />
                                     <Link href="/tours"><p>Tours</p></Link>
                                     <hr className={scss.border} />
                                     <Link href="/sights"><p>Sights</p></Link>
                                     <hr className={scss.border} />
                                     <Link href="/travel"><p>Travel stories</p></Link>
                                     <hr className={scss.border} />
-                                    <Link href="/aboutus"><p>About us</p></Link>
-                                    <hr className={scss.border} />
-                                    <Link href="/blogAndNews"><p>Blog & News</p></Link>
-                                    <hr className={scss.border} />
+                                    {
+                                        user && <>
+                                            <button onClick={() => { LogOut(); setOpenModal(false) }}>Logout</button>
+                                            <hr className={scss.border} /></>
+                                    }
                                 </div>
                             </div>
 
@@ -112,7 +152,7 @@ const Header = ({ isMain = false }) => {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 };
 
