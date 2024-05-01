@@ -31,11 +31,11 @@ const Header = ({ isMain = false }) => {
         setUser(res)
     }
 
-    const userId = localStorage.getItem("key")
-
     useEffect(() => {
+      window.location.reload();
+
         getUser()
-    }, [userId])
+    }, [])
 
     const handleScroll = useCallback(() => {
         if (window.scrollY > 50) {
