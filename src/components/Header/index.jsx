@@ -21,9 +21,10 @@ const Header = ({ isMain = false }) => {
     const router = useRouter();
     const currentRoute = router.pathname;
 
-    const { getMe } = useUser();
-    const { LogOut } = useAuth()
+    const { getMe, isLoading } = useUser();
+    const { LogOut, isAuth, checkAuth } = useAuth()
 
+    console.log(user);
 
     const getUser = async () => {
         setOpenModal(false)
@@ -32,10 +33,12 @@ const Header = ({ isMain = false }) => {
     }
 
     useEffect(() => {
-      window.location.reload();
+        if (isAuth) {
+            getUser(); // Fetch user data if authenticated
+        }
+    }, [isAuth]);
 
-        getUser()
-    }, [])
+    console.log(isAuth);
 
     const handleScroll = useCallback(() => {
         if (window.scrollY > 50) {
@@ -89,7 +92,7 @@ const Header = ({ isMain = false }) => {
     if (!isMain) {
         HeaderStyles = isActive ? scss.renderActive : scss.renderNonActive;
     }
-
+    if (isLoading) return <Preloader />
     return (
         <header id="header" className={HeaderStyles} style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             <Link href="/">

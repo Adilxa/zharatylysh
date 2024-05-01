@@ -1,18 +1,22 @@
 import AuthService from "@/services/AuthService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import useUser from "./useUser";
 
 const useAuth = () => {
   const [isAuth, setAuth] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
+  const { getMe } = useUser();
 
   const checkAuth = async () => {
     const res = localStorage.getItem("key");
 
     if (res) {
+      await getMe();
       router.push("/");
       setAuth(true);
+      return true;
     } else {
       setAuth(false);
       router.push("signin");
