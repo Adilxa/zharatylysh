@@ -18,7 +18,7 @@ const useUser = () => {
       setLoading(false);
       console.log(e);
     }
-  };
+  };  
 
   const updateMe = async (data) => {
     const id = localStorage.getItem("key");

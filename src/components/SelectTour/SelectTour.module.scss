@@ -50,20 +50,23 @@
     @media (max-width: 768px) {
       overflow-x: scroll;
       overflow-y: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
+      .filterWrap {
+        button {
+          text-align: start;
+        }
+      }
       &::-webkit-scrollbar {
         display: none;
       }
+
       h1 {
         font-size: large;
         font-weight: 600;
         // text-align: center;
-      }
-      .wrapper {
-        width: 100%;
-
-        .filterWrap {
-        }
       }
     }
   }

@@ -2,7 +2,7 @@ export const footerConsts = [
   {
     id: 1,
     title: "TRAVEL WEBSITE OF KYRGYZSTAN TOURS",
-    desc: "Zharatylysh Travel company is a family owned and operated travel company based in Bishkek, Kyrgyzstan.",
+    desc: "Zharatylysh Travel company is a fam",
   },
   {
     id: 2,

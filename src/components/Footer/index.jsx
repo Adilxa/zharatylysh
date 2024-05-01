@@ -17,7 +17,7 @@ const Footer = () => {
                         <>
                             <p className={isActive ? scss.descAc : scss.desc}>
                                 {item.desc && item.desc + " " && item.desc.length > 129
-                                    ? `${item.desc.substring(0, 129)}...`
+                                    ? `${item.desc.substring(0, 19)}...`
                                     : item.desc}
                             </p>
                         </>
@@ -58,7 +58,7 @@ const Footer = () => {
     );
     return (
         <>
-            <footer className={scss.footer}>{render}</footer >
+            <footer className={`${scss.footer} container`}>{render}</footer >
             <div className={scss.underFooter}>
                 <p className={scss.rights}>@ 2024 Zharatylysh Travel. All rights reserved</p>
                 <p>Created by @Adilxann</p>
