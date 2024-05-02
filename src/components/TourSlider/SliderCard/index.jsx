@@ -9,7 +9,7 @@ const SliderCard = ({
 }) => {
 
     return (
-        <Link href={`tour/` + id}>
+        <Link href={`tours/` + id}>
             <div className={scss.card}>
                 <div className={scss.days}>
                     <p className={scss.days_title}>123</p>
