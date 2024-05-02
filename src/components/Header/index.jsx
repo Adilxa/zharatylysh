@@ -8,7 +8,6 @@ import Image from "next/image";
 import menu from '../../public/assets/svg/menu.svg';
 import close from '../../public/assets/svg/close.svg';
 import useUser from "@/hooks/useUser";
-import Preloader from "../Preloader";
 import useAuth from "@/hooks/useAuth";
 
 const Header = ({ isMain = false }) => {
@@ -22,23 +21,19 @@ const Header = ({ isMain = false }) => {
     const currentRoute = router.pathname;
 
     const { getMe, isLoading } = useUser();
-    const { LogOut, isAuth, checkAuth } = useAuth()
+    const { LogOut } = useAuth()
 
-    console.log(user);
-
-    const getUser = async () => {
+    const getUser = useCallback(async () => {
         setOpenModal(false)
         const res = await getMe();
         setUser(res)
-    }
+    }, [isLoading])
+
 
     useEffect(() => {
-        if (isAuth) {
-            getUser(); // Fetch user data if authenticated
-        }
-    }, [isAuth]);
+        getUser();
+    }, []);
 
-    console.log(isAuth);
 
     const handleScroll = useCallback(() => {
         if (window.scrollY > 50) {
@@ -81,8 +76,6 @@ const Header = ({ isMain = false }) => {
                     {item.title}
                 </Link>
             ))
-
-
         ,
         []
     );
@@ -92,7 +85,7 @@ const Header = ({ isMain = false }) => {
     if (!isMain) {
         HeaderStyles = isActive ? scss.renderActive : scss.renderNonActive;
     }
-    if (isLoading) return <Preloader />
+
     return (
         <header id="header" className={HeaderStyles} style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             <Link href="/">

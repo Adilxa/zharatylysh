@@ -9,16 +9,15 @@ const useUser = () => {
   const getMe = async () => {
     const id = localStorage.getItem("key");
     setLoading(true);
-    try {
+    if (id) {
       const res = await $api.get("/user/" + id);
       setUser(res.data);
       setLoading(false);
       return res.data;
-    } catch (e) {
+    } else {
       setLoading(false);
-      console.log(e);
     }
-  };  
+  };
 
   const updateMe = async (data) => {
     const id = localStorage.getItem("key");
