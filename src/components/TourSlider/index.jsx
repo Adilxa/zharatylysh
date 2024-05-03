@@ -5,27 +5,26 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useTours from "@/hooks/useTours";
 import Preloader from "../Preloader";
+import $api from "@/api/http";
 
 
 
 const TourSlider = () => {
-    //   const { tours, getTours, isLoading } = useTours();
-    //   const [sliderData, setSliderData] = useState();
-    //   const router = useRouter();
-    //   const { tour } = router.query
-
-    //   useEffect(() => {
-    //     const path = {
-    //       pathname: "",
-    //       search: '',
-    //     }
-    //     router.push(path, path, { shallow: true });
-    //   }, [])
 
 
-    const { getTours, tours, isLoading } = useTours()
+    const [tours, setTours] = useState([])
+
+
+    const getTours = async () => {
+        await $api.get("/tour")
+            .then((res) => {
+                setTours(res.data)
+            })
+            .catch((e) => {
+                alert("somethin went wrong");
+            })
+    }
 
     useEffect(() => {
         getTours()
@@ -128,9 +127,6 @@ const TourSlider = () => {
         [tours]
     );
 
-
-
-    if (isLoading) return <Preloader />
     return (
         <div className={scss.wrapper}>
             <div className="">
