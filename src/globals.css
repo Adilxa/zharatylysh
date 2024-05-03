@@ -18,10 +18,6 @@
   overflow-x: hidden !important;
 }
 
-.dots {
-  top: 300px !important;
-}
-
 .dots li.slick-active button:before {
   content: "" !important;
   background: #2e325a !important;
@@ -134,7 +130,7 @@
 
 @media (max-width: 950px) {
   .mainSliders .slick-slide {
-    width: 300px !important;
+    width: 300px ;
   }
 }
 

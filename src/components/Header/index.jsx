@@ -9,6 +9,7 @@ import menu from '../../public/assets/svg/menu.svg';
 import close from '../../public/assets/svg/close.svg';
 import useUser from "@/hooks/useUser";
 import useAuth from "@/hooks/useAuth";
+import { usePathname } from "next/navigation";
 
 const Header = ({ isMain = false }) => {
     const [isActive, setActive] = useState(false);
@@ -16,6 +17,7 @@ const Header = ({ isMain = false }) => {
     const [openModal, setOpenModal] = useState(false);
     const [user, setUser] = useState(null)
 
+    const pathname = usePathname()
 
     const router = useRouter();
     const currentRoute = router.pathname;
@@ -32,7 +34,7 @@ const Header = ({ isMain = false }) => {
 
     useEffect(() => {
         getUser();
-    }, []);
+    }, [pathname]);
 
 
     const handleScroll = useCallback(() => {
@@ -69,7 +71,7 @@ const Header = ({ isMain = false }) => {
 
             HeaderLinks.map((item) => (
                 <Link
-                    className={currentRoute == `/${item.link}` ? scss.activeLink : ""}
+                    className={pathname == `/${item.link}` ? scss.activeLink : ""}
                     href={'/' + item.link}
                     key={item.id}
                 >
@@ -77,7 +79,7 @@ const Header = ({ isMain = false }) => {
                 </Link>
             ))
         ,
-        []
+        [pathname]
     );
 
     let HeaderStyles = isActive ? scss.active : scss.nonActive;
@@ -89,7 +91,7 @@ const Header = ({ isMain = false }) => {
     return (
         <header id="header" className={HeaderStyles} style={{ paddingTop: "10px", paddingBottom: "10px" }}>
             <Link href="/">
-                <h1 style={{ color: "#000" }}>Zharatylysh</h1>
+                <h1 style={{ color: "#000" }}>Zharatylush</h1>
             </Link>
             <nav>{renderLinks}</nav>
             <div style={{ display: "flex", alignItems: "end", gap: "15px", fontSize: "15px" }}>

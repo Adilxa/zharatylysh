@@ -3,32 +3,13 @@ import scss from "./TourSlider.module.scss";
 import SliderCard from "./SliderCard/index";
 import Slider from "react-slick";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Preloader from "../Preloader";
-import $api from "@/api/http";
+import { useSearchParams } from "next/navigation";
 
 
 
-const TourSlider = () => {
+const TourSlider = ({ tours }) => {
 
-
-    const [tours, setTours] = useState([])
-
-
-    const getTours = async () => {
-        await $api.get("/tour")
-            .then((res) => {
-                setTours(res.data)
-            })
-            .catch((e) => {
-                alert("somethin went wrong");
-            })
-    }
-
-    useEffect(() => {
-        getTours()
-    }, [])
+    const searchParams = useSearchParams();
 
     function SampleNextArrow({ onClick }) {
         return (
@@ -123,7 +104,10 @@ const TourSlider = () => {
     // );
 
     const renderAllTours = useMemo(
-        () => tours?.map((el, index) => <SliderCard key={index} {...el} />),
+        () =>
+
+            tours.map((el, index) => <SliderCard key={index} {...el} />)
+        ,
         [tours]
     );
 

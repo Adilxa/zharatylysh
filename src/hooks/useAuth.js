@@ -51,7 +51,7 @@ const useAuth = () => {
 
   const LogOut = async () => {
     localStorage.removeItem("key");
-    checkAuth();
+    router.push("/");
   };
 
   return {
