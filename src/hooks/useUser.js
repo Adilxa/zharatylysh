@@ -1,10 +1,13 @@
 import { useState } from "react";
 import $api from "@/api/http";
+import { useRouter } from "next/navigation";
 
 const useUser = () => {
   const [isLoading, setLoading] = useState(false);
 
   const [user, setUser] = useState(null);
+
+  const router = useRouter();
 
   const getMe = async () => {
     const id = localStorage.getItem("key");
@@ -22,7 +25,9 @@ const useUser = () => {
   const updateMe = async (data) => {
     const id = localStorage.getItem("key");
     try {
-      const res = await $api.patch("/user/" + id, data); // Correctly using axios.patch
+      const res = await $api
+        .patch("/user/" + id, data)
+        .then(() => router.push("/"));
       return res.data;
     } catch (e) {
       console.log(e);
