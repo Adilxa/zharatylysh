@@ -21,14 +21,12 @@ function SamplePrevArrow({ onClick }) {
     );
 }
 
-const SightsSlider = ({ sights }) => {
-
-    console.log(sights);
+const SightsSlider = ({ sights, showArrows }) => {
 
     const settings = {
         className: "center",
         dots: false,
-        arrows: true,
+        arrows: showArrows ? true : showArrows,
         infinite: false,
         slidesToShow: 4,
         slidesToScroll: 1,

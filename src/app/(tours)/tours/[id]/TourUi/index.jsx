@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import scss from "./Tour.module.scss"
 import { useParams } from 'next/navigation'
 import $api from '@/api/http';
-import Image from 'next/image';
 import Preloader from '@/components/Preloader';
 import SightsSlider from '@/components/SightsSlider';
 

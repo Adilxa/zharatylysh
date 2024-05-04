@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  transition: margin-right 4s ease-in-out;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #434343;
+
+    h1 {
+      font-size: 1.5rem;
+      line-height: 39px;
+      font-weight: 500;
+      color: #434343;
+    }
+    a:hover {
+      margin-right: 5px;
+      transition: all ease-in-out 0.3s;
+    }
+  }
+}
