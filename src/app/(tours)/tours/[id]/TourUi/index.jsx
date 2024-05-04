@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import $api from '@/api/http';
 import Image from 'next/image';
 import Preloader from '@/components/Preloader';
+import SightsSlider from '@/components/SightsSlider';
 
 function TourUi() {
 
@@ -48,9 +49,43 @@ function TourUi() {
                     <button>Find tours</button>
                 </div>
             </div>
-            <section className='container'>
-                
+            <section className='container' style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div className={scss.divider}> <h1>Tours / {tour?.location}</h1></div>
+                <section className={scss.moreAboutTour}>
+                    <div>
+                        <h5>Start / End days</h5>
+                        <p>{tour?.startDate} <br />{tour?.endDate}</p>
+
+                    </div>
+                    <div>
+                        <h5>Location</h5>
+                        <p>
+                            {tour?.location}
+                        </p>
+                    </div>
+                    <div>
+                        <h5>Price</h5>
+                        <p>
+                            {tour?.price}c
+                        </p>
+                    </div>
+                </section>
             </section>
+            <div className={scss.tourDescription}>
+                <div className='container'>
+                    <div className={scss.DescDivider}> <h1>About Tour</h1></div>
+                    <p>{tour?.description}</p>
+                </div>
+            </div>
+            <div className={scss.sights}>
+                <div className={`${scss.divider} container`}>
+                    <h1>
+                        Sights visited on this tour
+                    </h1>
+                </div>
+                <SightsSlider sights={tour?.sights} />
+
+            </div>
         </>
     )
 }

@@ -16,6 +16,7 @@
 
 .mainSliders {
   overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .dots li.slick-active button:before {
@@ -130,7 +131,7 @@
 
 @media (max-width: 950px) {
   .mainSliders .slick-slide {
-    width: 300px ;
+    width: 300px;
   }
 }
 
@@ -172,10 +173,6 @@
 
 .slick-track {
   display: flex !important;
-}
-
-.mainSliders .slick-list {
-  height: 300px !important;
 }
 
 .mainSliders .dots li button {
