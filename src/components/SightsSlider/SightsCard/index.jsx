@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const SightsCard = ({ img, title, id }) => {
     return (
-        <Link href={`/sight/${id}`}>
+        <Link href={`/sights/${id}`}>
             <div className={scss.card}>
                 <div className={scss.front}>
                     <img src={img} alt={title} width={280} height={250} />

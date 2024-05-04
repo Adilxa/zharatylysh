@@ -82,7 +82,7 @@ function TourUi() {
                         Sights visited on this tour
                     </h1>
                 </div>
-                <SightsSlider sights={tour?.sights} />
+                <SightsSlider sights={tour?.sights} showArrows={true} />
 
             </div>
         </>

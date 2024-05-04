@@ -11,8 +11,8 @@ export const HeaderLinks = [
   },
   {
     id: 3,
-    title: "Travel stories",
-    link: "travel",
+    title: "About Us",
+    link: "aboutus",
   },
 ];
 

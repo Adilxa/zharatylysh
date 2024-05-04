@@ -12,7 +12,6 @@ function HomePage() {
 
     return (
         <>
-
             <Main />
             <SelectTour />
             <SelectSights />
