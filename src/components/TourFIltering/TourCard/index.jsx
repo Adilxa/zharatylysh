@@ -25,6 +25,7 @@ const TourCard = ({
                         src={img}
                         alt="background-image"
                         height={280}
+                        style={{ minHeight: "220px" }}
                     />
                     <div className={scss.bottomContent}>
                         <div className={scss.textContainer}>

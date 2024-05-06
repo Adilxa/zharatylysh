@@ -5,14 +5,15 @@ import Link from "next/link";
 const SliderCard = ({
     title,
     img,
-    id
+    id,
+    price
 }) => {
 
     return (
         <Link href={`tours/` + id}>
             <div className={scss.card}>
                 <div className={scss.days}>
-                    <p className={scss.days_title}>123</p>
+                    <p className={scss.days_title}>{price}c</p>
                 </div>
                 <div className={scss.front}>
                     {/* eslint-disable-next-line no-use-before-define */}
@@ -21,6 +22,7 @@ const SliderCard = ({
                         src={img}
                         alt="background-image"
                         height={280}
+                        style={{ minHeight: "300px" }}
                     />
                     <div className={scss.bottomContent}>
                         <div className={scss.textContainer}>

@@ -11,7 +11,7 @@
   height: fit-content;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
   padding: 25px 0px;
   transition: width 0.2s cubic-bezier(0.51, 0.18, 0, 0.88);
 
@@ -70,7 +70,7 @@
     border-radius: 3px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     justify-items: center;

@@ -39,7 +39,7 @@ function SettingsForm() {
 
     const handleSubmit = async (e, data) => {
         e.preventDefault();
-        updateMe(data);
+        await updateMe(data);
     };
 
     if (isLoading) return <Preloader />;

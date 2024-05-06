@@ -5,6 +5,7 @@
   z-index: 1000;
   width: 100%;
   height: 100%;
+
   display: block;
   cursor: pointer;
   .days {
@@ -50,6 +51,7 @@
     img {
       width: 100%;
       object-fit: cover;
+
       @include breackpoint(xm) {
         width: 100%;
         height: 232px;
