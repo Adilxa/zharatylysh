@@ -1,27 +1,6 @@
 .wrapper {
   display: grid;
   width: 100%;
-  height: 620px;
-
-  @media (max-width: 600px) {
-    height: 870px;
-  }
-
-  @media (max-width: 500px) {
-    height: 880px;
-  }
-
-  @media (max-width: 450px) {
-    height: 900px;
-  }
-
-  @media (max-width: 400px) {
-    height: 940px;
-  }
-
-  @media (max-width: 352px) {
-    height: 970px;
-  }
 
   .number_index_left_content {
     display: flex;
@@ -176,14 +155,13 @@
 
   @media (max-width: 600px) {
     padding: 30px 60px;
-    height: 70%;
+    margin: 20px 0;
   }
 
   @media (max-width: 445px) {
-    width: 95%;
-    padding: 10px;
-    height: 60%;
-    margin: 0 auto;
+    width: 100%;
+    padding: 40px 20px;
+    margin: 20px 0;
   }
 
   .inputs {
@@ -203,20 +181,18 @@
   .button {
     display: flex;
     width: 30%;
-    height: 55px;
+    padding: 20px;
     background: #2e325a;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
     @media (max-width: 600px) {
-      margin: 20px;
       width: 100%;
       margin-left: 0;
     }
 
     @media (max-width: 450px) {
-      margin: 20px;
       width: 100%;
       margin-left: 0;
     }

@@ -1,12 +1,43 @@
 "use client"
 import React, { useState } from "react";
 import scss from "./FeedBack.module.scss";
+import emailjs from "@emailjs/browser"
 
 const FeedBack = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
     const [peopleNumber, setPeopleNumber] = useState("");
+
+    const [isSend , setSend] = useState(false)
+
+
+    const onSendMessage = async() => {
+       try{
+        await emailjs.send(
+            "service_6rn0l09",
+            "template_4oz2tjc",
+            {
+                email:email,
+                name,
+                number,
+                peopleNumber
+            },
+            "In1BeNLlqF2cqsWpL"
+          ).then(() => {
+            setEmail("")
+            setDate("")
+            setName("")
+            setNumber("") 
+          })
+          setSend(true)
+          alert("Success!");
+       }catch (error){
+    console.log(error);
+       }
+      
+    }
+
 
     return (
         <div className={scss.wrapper}>
@@ -49,7 +80,7 @@ const FeedBack = () => {
                         />
 
                     </div>
-                    <button className={scss.button} >
+                    <button onClick={() => onSendMessage()} style={{backgroundColor:isSend && "gray"}} className={scss.button} >
                         <p className={scss.text}>Send now</p>
                     </button>
                 </div>
