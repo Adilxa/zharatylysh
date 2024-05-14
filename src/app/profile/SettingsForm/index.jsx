@@ -25,7 +25,6 @@ function SettingsForm() {
         }
     }, [user]);
 
-    console.log(user);
 
     const ROLE = 'user';
 

@@ -32,7 +32,11 @@ const useAuth = () => {
       router.push("/");
       setAuth(true);
       return res;
-    } catch (e) {}
+    } catch (e) 
+    {
+      alert("No User with this email")
+      setLoading(false)
+    }
   };
 
   const SignUp = async ({ email, password, role }) => {
@@ -45,6 +49,11 @@ const useAuth = () => {
       setAuth(true);
       return res;
     } catch (e) {
+      alert(
+        "Something went wrong!"
+      )
+      setLoading(false)
+   
       console.log(e);
     }
   };

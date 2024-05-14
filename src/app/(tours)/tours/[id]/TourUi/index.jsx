@@ -13,7 +13,6 @@ function TourUi() {
     const [tour, setTour] = useState(null)
     const [isLoading, setLoading] = useState(false)
 
-    console.log(params.id);
 
     const getTour = async () => {
         setLoading(true)
@@ -34,7 +33,6 @@ function TourUi() {
     }, [])
 
 
-    console.log(tour);
 
 
     if (isLoading) return <Preloader />

@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const montserrat = Montserrat({
-  weight: ["400", "500", "300", "100", "700"],
+  weight: ["400", "500", "600" , "300", "100", "700"],
   subsets: ["latin"],
   display: "swap",
   style: ["normal", "italic"],
