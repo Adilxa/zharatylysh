@@ -5,8 +5,18 @@ import { useParams } from 'next/navigation'
 import $api from '@/api/http';
 import Preloader from '@/components/Preloader';
 import SightsSlider from '@/components/SightsSlider';
+import PaymentForm from '@/components/Payment';
+import PaymentStatus from '@/components/Payment/Stutus';
+import PaymentButton from '@/components/Payment';
+import FeedBack from '@/components/FeedBack';
 
 function TourUi() {
+
+    const [oredId, setorederId] = useState('');
+
+    const handlePaymentInitiated = (url) => {
+      setorederId(url);
+    };
 
     const params = useParams();
 
@@ -31,8 +41,6 @@ function TourUi() {
     useEffect(() => {
         getTour()
     }, [])
-
-
 
 
     if (isLoading) return <Preloader />
@@ -82,6 +90,16 @@ function TourUi() {
                 </div>
                 <SightsSlider sights={tour?.sights} showArrows={true} />
 
+            </div>
+                <PaymentButton price={tour?.price} id={params.id}/>
+
+
+            <FeedBack/>
+
+            <div>
+{/*             
+            <PaymentForm onPaymentInitiated={handlePaymentInitiated} />
+        <PaymentStatus orderId={oredId}/> */}
             </div>
         </>
     )
