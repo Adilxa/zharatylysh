@@ -45,7 +45,10 @@ const useAuth = () => {
       const res = await AuthService.signUp(email, password, role).then((res) =>
         localStorage.setItem("key", res.data.id)
       );
-      router.push("/");
+      setLoading(
+        false
+      )
+      // router.push("/");
       setAuth(true);
       return res;
     } catch (e) {

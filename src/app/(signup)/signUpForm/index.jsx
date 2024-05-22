@@ -4,13 +4,16 @@ import useAuth from '@/hooks/useAuth';
 import Preloader from '@/components/Preloader';
 import Link from 'next/link';
 import scss from "../signup/SignUp.module.scss"
+import Modal from '@/components/Modal';
 
 function SignUpForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
 
-    const { isLoading, SignUp } = useAuth();
+    const [modal, setModal] = useState(false)
+
+    const { isLoading, SignUp , isAuth} = useAuth();
 
     const ROLE = "user";
 
@@ -33,21 +36,30 @@ function SignUpForm() {
             return;
         }
 
-        await SignUp({ ...user });
+   await SignUp({ ...user });
+
+
     };
 
     useEffect(() => {
+
+        
+        if (isAuth) {
+            setModal(!modal)
+        }
+
         const header = document.getElementById("header");
         header.style.display = "none";
 
         return () => {
             header.style.display = "flex";
         };
-    }, []);
+    }, [isAuth]);
 
     if (isLoading) return <Preloader />;
 
     return (
+       <>
         <form onSubmit={(e) => onSubmit(e, user)}>
             <h1>Sign Up</h1>
             <input
@@ -66,6 +78,17 @@ function SignUpForm() {
             <button>Registration</button>
             <p>Or if you have an account already click <span><Link href="/signin">here</Link></span></p>
         </form>
+        <Modal show={modal}>
+            <h1>
+                <b>Zharatylush Taravel</b>
+            </h1>
+                <div>
+                <a href="https://www.google.com/intl/ru/gmail/about/">Confirm your Account</a>
+            <p>you need go to the Gmail and confirm your account</p>
+                </div>
+                
+        </Modal>
+       </>
     );
 }
 

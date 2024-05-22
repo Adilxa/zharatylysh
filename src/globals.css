@@ -12,6 +12,22 @@
   font-family: "Montserrat", sans-serif;
 }
 
+/*modal*/
+.open-modal-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+
+.open-modal-button:hover {
+  background-color: #0056b3;
+}
+
+
 /* Tour slider styles */
 
 .mainSliders {
