@@ -17,7 +17,7 @@ function PaymentTourUi({ tour }) {
 
     const onPay = async () => {
         try {
-            if(tourAmount > 0){
+            if (tourAmount > 0) {
                 const response = await $api.post("booked-tour", {
                     sum: Number(((tour.price + tour.price * 0.002) * tourAmount).toFixed(0)),
                     user: Number(localStorage.getItem("key")),
@@ -39,15 +39,14 @@ function PaymentTourUi({ tour }) {
             }
         }
     };
-    
+
     useEffect(() => {
-        if(tourAmountLeft <= 0) {
+        if (tourAmountLeft <= 0) {
             setAmount(0)
             setTourLeft(0)
         }
     }, [])
 
-    console.log(tourAmount);
 
     if (!tour) return <Preloader />
     return (
@@ -115,21 +114,21 @@ function PaymentTourUi({ tour }) {
                         </button>
                     </div>
                     <button
-    onClick={onPay}
-    className={`bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50`}
-    style={{
-        marginLeft: "20px",
-        padding: "10px 20px",
-        backgroundColor: tourAmount <= 0 ? "gray" : "#1D4ED8",
-        color: "white",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        transition: "background-color 0.3s",
-    }}
->
-    Pay Now
-</button>
+                        onClick={onPay}
+                        className={`bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50`}
+                        style={{
+                            marginLeft: "20px",
+                            padding: "10px 20px",
+                            backgroundColor: tourAmount <= 0 ? "gray" : "#1D4ED8",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            transition: "background-color 0.3s",
+                        }}
+                    >
+                        Pay Now
+                    </button>
 
 
                 </div>

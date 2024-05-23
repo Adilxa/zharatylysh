@@ -1,0 +1,60 @@
+// BookedCard.module.scss
+
+.card {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.cardImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 15px;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.cardDescription {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.cardInfo {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #444;
+
+  strong {
+    color: #333;
+  }
+}
+
+.amountBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #2e32a5;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
