@@ -1,7 +1,7 @@
 export const AboutUsText = [
   {
     id: 1,
-    text: "Kyrgyz Riders Travel company is a family owned and operated travel company based in Bishkek, Kyrgyzstan. We specialize in 1 day to 3 weeks, fully guided and outfitted adventures across Kyrgyzstan. Our professional guides can take you to the most remote and beautiful areas in the country. Our dedication to your enjoyment and learning is why people travel with us to enjoy the majestic beauty of the country. Read their testimonials to learn more about why we are considered the one of the best guide services in Kyrgyzstan.",
+    text: "Zharatylush Travel company is a family owned and operated travel company based in Bishkek, Kyrgyzstan. We specialize in 1 day to 3 weeks, fully guided and outfitted adventures across Kyrgyzstan. Our professional guides can take you to the most remote and beautiful areas in the country. Our dedication to your enjoyment and learning is why people travel with us to enjoy the majestic beauty of the country. Read their testimonials to learn more about why we are considered the one of the best guide services in Kyrgyzstan.",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const AboutUsText = [
   },
   {
     id: 5,
-    text: "Kyrgyz Riders Travel company was founded on May 1, 2017 by a tour guide and history teacher Aman from the village of Kochkor close to Song-Kol Lake. In the beginning company had 2 main goals:",
+    text: "Zharatylush Travel company was founded on May 1, 2017 by a tour guide and history teacher Aman from the village of Kochkor close to Song-Kol Lake. In the beginning company had 2 main goals:",
   },
   {
     id: 6,
@@ -30,15 +30,15 @@ export const AboutUsText = [
   },
   {
     id: 8,
-    text: "Kyrgyz Riders originally began with 3 people organizing mainly horseback riding tours to Song-Kol Lake. Today, we have over 15 people working as translators, horse guides, horsemen, drivers, and yurt providers. As a result of the intensive work of the team, the company has grown rapidly and now offers horseback, hiking, off-road tours and many others throughout the country.",
+    text: "Zharatylush originally began with 3 people organizing mainly horseback riding tours to Song-Kol Lake. Today, we have over 15 people working as translators, horse guides, horsemen, drivers, and yurt providers. As a result of the intensive work of the team, the company has grown rapidly and now offers horseback, hiking, off-road tours and many others throughout the country.",
   },
   {
     id: 9,
-    text: "In addition to helping locals, Kyrgyz Riders supports the local social activities for both children and adults. Our company award outstanding students studying English at the local schools and we also sponsor a local volleyball team in Kochkor where the company started. Additionally, we actively participate in a number of charitable and ecological projects.",
+    text: "In addition to helping locals, Zharatylush supports the local social activities for both children and adults. Our company award outstanding students studying English at the local schools and we also sponsor a local volleyball team in Kochkor where the company started. Additionally, we actively participate in a number of charitable and ecological projects.",
   },
   {
     id: 10,
-    text: "Kyrgyz Riders collaborates with different tourist companies, small businesses, and local families to create both community and opportunities for success for Kyrgyz citizens in-country.",
+    text: "Zharatylush collaborates with different tourist companies, small businesses, and local families to create both community and opportunities for success for Kyrgyz citizens in-country.",
   },
   {
     id: 11,

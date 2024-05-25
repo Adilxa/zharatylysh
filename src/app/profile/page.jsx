@@ -19,7 +19,6 @@ async function Profile() {
 
     const bookedList = await getMyBooked()
 
-
     return (
 
         <>

@@ -5,20 +5,45 @@ import { useParams } from 'next/navigation'
 import $api from '@/api/http';
 import Preloader from '@/components/Preloader';
 import SightsSlider from '@/components/SightsSlider';
-import PaymentForm from '@/components/Payment';
-import PaymentStatus from '@/components/Payment/Stutus';
 import PaymentButton from '@/components/Payment';
 import FeedBack from '@/components/FeedBack';
+import LeftComment from '@/components/leftComment';
 
 function TourUi() {
 
     const [oredId, setorederId] = useState('');
 
+    const [isTourBought, setBoughtTour] = useState(false)
+
+    const params = useParams()
+
     const handlePaymentInitiated = (url) => {
-      setorederId(url);
+        setorederId(url);
     };
 
-    const params = useParams();
+    const getTourBought = async () => {
+
+        const id = localStorage.getItem("key")
+
+        await $api.get("/booked-tour")
+            .then((response) => {
+                if (response.data) {
+                    const newArr = response.data.filter((el) => el.user.id == id)
+                    const filteredArr = newArr.filter((el) => el.tour.id == params.id)
+
+                    if (filteredArr.length) {
+                        setBoughtTour(true)
+
+                    }
+
+                } else {
+                    setBoughtTour(false)
+                    return 0
+                }
+            })
+    }
+
+    console.log(isTourBought);
 
     const [tour, setTour] = useState(null)
     const [isLoading, setLoading] = useState(false)
@@ -40,6 +65,7 @@ function TourUi() {
 
     useEffect(() => {
         getTour()
+        getTourBought()
     }, [])
 
 
@@ -91,13 +117,15 @@ function TourUi() {
                 <SightsSlider sights={tour?.sights} showArrows={true} />
 
             </div>
-                <PaymentButton price={tour?.price} id={params.id}/>
+            <PaymentButton price={tour?.price} id={params.id} />
 
 
-            <FeedBack/>
+            {
+                isTourBought ? <LeftComment tourId={params.id} userId={localStorage.getItem("key")}/> : <FeedBack />
+            }
 
             <div>
-{/*             
+                {/*             
             <PaymentForm onPaymentInitiated={handlePaymentInitiated} />
         <PaymentStatus orderId={oredId}/> */}
             </div>

@@ -1,0 +1,54 @@
+.commentSection {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .rating,
+  .comment {
+    margin-bottom: 15px;
+  }
+  
+  .rating label,
+  .comment label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .ratingInput,
+  .commentInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .submitButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #2e325a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #2e325a;
+  }
+  

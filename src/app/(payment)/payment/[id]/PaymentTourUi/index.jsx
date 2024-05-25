@@ -30,7 +30,6 @@ function PaymentTourUi({ tour }) {
                     throw new Error("Failed to process payment");
                 }
             }
-
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 alert("This tour has already been bought");

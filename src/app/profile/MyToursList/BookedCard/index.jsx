@@ -1,5 +1,6 @@
 import React from "react";
 import scss from "./BookedCard.module.scss";
+import Link from "next/link";
 
 function BookedCard({ tour, amount }) {
   return (
