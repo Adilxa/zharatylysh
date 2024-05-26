@@ -121,7 +121,7 @@ function TourUi() {
 
 
             {
-                isTourBought ? <LeftComment tourId={params.id} userId={localStorage.getItem("key")}/> : <FeedBack />
+                isTourBought ? <LeftComment tourId={params.id} userId={localStorage.getItem("key")} /> : <FeedBack />
             }
 
             <div>

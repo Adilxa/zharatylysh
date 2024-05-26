@@ -27,7 +27,7 @@ function TourFiltering() {
         setLoading(true);
         await $api.get("/tour")
             .then((res) => {
-                setTours(res.data);
+                setTours(res.data?.filter((el) => el.isApprove == true));
                 const arrCriterias = res.data.map((el) => el["location"]);
                 setCriterias([...new Set(arrCriterias)]);
                 setLoading(false);

@@ -23,7 +23,7 @@ const SelectTour = () => {
     const getTours = async () => {
         setLoading(true)
         $api.get("/tour").then((res) => {
-            setTours(res.data)
+            setTours(res.data?.filter((el) => el.isApprove == true))
             setInitialTours(res.data)
             setLoading(false)
         })
@@ -44,6 +44,7 @@ const SelectTour = () => {
             setTours(initialTours)
         }
     }
+
 
     useEffect(() => {
         getTours()
