@@ -24,3 +24,6 @@ function BookedCard({ tour, amount , id }) {
 }
 
 export default BookedCard;
+
+
+//here is doing you know

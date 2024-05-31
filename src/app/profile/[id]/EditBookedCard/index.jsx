@@ -1,93 +1,121 @@
 "use client"
-// EditBookedCard.js
-// EditBookedCard.js
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import $api from "@/api/http";
 import Preloader from "@/components/Preloader";
-import styles from "./EditBookedCard.module.scss";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 
 function EditBookedCard() {
-    const router = useRouter();
-    const id = router.params;
+    const params = useParams()
 
-    console.log(router.params);
-    const [bookedTour, setBookedTour] = useState({});
-    const [editedAmount, setEditedAmount] = useState(0);
-    const [isLoading, setLoading] = useState(false);
-    const [isUpdating, setUpdating] = useState(false);
-    const [isDeleting, setDeleting] = useState(false);
+    const [bookedTour, setBookedTour] = useState({})
+    const [isLoading, setLoading] = useState(false)
 
-    useEffect(() => {
-            getBookedTour();
-    }, []);
+    const [tourAmount, setAmount] = useState(1)
+    const [tourAmountLeft, setTourLeft] = useState(0)
 
     const getBookedTour = async () => {
-        setLoading(true);
+        setLoading(true)
         try {
-            const res = await $api.get(`booked-tour/${id}`);
+            const res = await $api.get("booked-tour")
             if (res.data) {
-                setBookedTour(res.data);
-                setEditedAmount(res.data.amount);
+                setBookedTour(res.data.filter((el) => el.id == params.id)[0])
+                setTourLeft(res.data.filter((el) => el.id == params.id)[0].tour.amount);
+                setAmount(res.data.filter((el) => el.id == params.id)[0].amount)
             }
-            setLoading(false);
-        } catch (error) {
-            console.error("Error fetching booked tour:", error);
-            setLoading(false);
+            setLoading(false)
+        } catch (e) {
+            console.log(e);
+            setLoading(false)
         }
-    };
+    }
 
-    const handleEditAmount = (e) => {
-        setEditedAmount(e.target.value);
-    };
+    useEffect(() => {
+        getBookedTour()
+    }, [])
 
-    const handleUpdate = async () => {
-        setUpdating(true);
-        try {
-            await $api.put(`booked-tour/${id}`, { amount: editedAmount });
-            // Optionally update local state or perform other actions
-            setUpdating(false);
-        } catch (error) {
-            console.error("Error updating booked tour:", error);
-            setUpdating(false);
+    useEffect(() => {
+        if (tourAmountLeft <= 0) {
+            setAmount(0)
+            setTourLeft(0)
         }
-    };
+    }, [])
 
-    const handleDelete = async () => {
-        setDeleting(true);
-        try {
-            await $api.delete(`booked-tour/${id}`);
-            router.push("/booked-tours"); // Redirect to booked tours page after deletion
-        } catch (error) {
-            console.error("Error deleting booked tour:", error);
-            setDeleting(false);
-        }
-    };
+    const onSave = async () => {
+       try{
+        await $api.put("booked-tour/" + params.id, { ...bookedTour, amount: tourAmount })
+        await $api.put("tour/" + bookedTour.tour.id, { ...bookedTour.tour.id, amount: tourAmountLeft })
+        toast("Good ")
+       }catch(e){
+        console.log(e);
+       }
+    }
 
-    if (isLoading) return <Preloader />;
-
+    if (isLoading) return <Preloader />
     return (
-        <div className={styles.container}>
-            <h1 className={styles.heading}>Edit Booked Tour</h1>
-            <div className={styles.formGroup}>
-                <label htmlFor="amount" className={styles.label}>Amount:</label>
-                <input
-                    type="number"
-                    id="amount"
-                    value={editedAmount}
-                    onChange={handleEditAmount}
-                    className={styles.input}
-                />
-            </div>
-            <div className={styles.actions}>
-                <button onClick={handleUpdate} disabled={isUpdating} className={styles.button}>
-                    {isUpdating ? "Updating..." : "Update"}
+        <section className={` container`} style={{ margin: "7% auto" }}>
+            <div className="mt-5 flex justify-between">
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <button
+                        style={{
+                            backgroundColor: "#f0f0f0",
+                            border: "1px solid #ccc",
+                            borderRadius: "5px",
+                            padding: "10px 15px",
+                            cursor: "pointer",
+                            transition: "background-color 0.3s, color 0.3s",
+                        }}
+                        onClick={() => {
+                            if (tourAmount > 0) {
+                                setAmount(tourAmount - 1);
+                                setTourLeft(tourAmountLeft + 1)
+                            }
+                        }}
+                    >
+                        -1
+                    </button>
+                    <h2 style={{ margin: "0 10px", fontSize: "20px" }}>{tourAmount} got</h2>
+                    <h2 style={{ margin: "0 10px", fontSize: "20px" }}>{tourAmountLeft} left</h2>
+                    <button
+                        style={{
+                            backgroundColor: "#f0f0f0",
+                            border: "1px solid #ccc",
+                            borderRadius: "5px",
+                            padding: "10px 15px",
+                            cursor: "pointer",
+                            transition: "background-color 0.3s, color 0.3s",
+                        }}
+                        onClick={() => {
+                            if (tourAmountLeft > 0) {
+                                setAmount(tourAmount + 1);
+                                setTourLeft(tourAmountLeft - 1)
+                            }
+                        }}
+                    >
+                        +1
+                    </button>
+                </div>
+                <button
+                    onClick={onSave}
+                    className={`bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50`}
+                    style={{
+                        marginLeft: "20px",
+                        padding: "10px 20px",
+                        backgroundColor: tourAmount <= 0 ? "gray" : "#1D4ED8",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        transition: "background-color 0.3s",
+                    }}
+                >
+                    Save
                 </button>
-                <button onClick={handleDelete} disabled={isDeleting} className={styles.button}>
-                    {isDeleting ? "Deleting..." : "Delete"}
-                </button>
+
+
             </div>
-        </div>
+        </section>
     );
 }
 
