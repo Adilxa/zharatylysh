@@ -22,7 +22,7 @@ const SliderCard = ({
                         src={img}
                         alt="background-image"
                         height={280}
-                        style={{ minHeight: "300px" }}
+                        style={{ minHeight: "300px" , maxHeight:"300px"}}
                     />
                     <div className={scss.bottomContent}>
                         <div className={scss.textContainer}>

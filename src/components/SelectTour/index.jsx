@@ -34,11 +34,12 @@ const SelectTour = () => {
     }
 
     const onClickFilterCriterias = (filter) => {
+
         if (filter !== "/") {
             router.replace(filter, { scroll: false })
             const newArr = tours.filter((el) => el.review.length >= 1)
-            setTours(newArr)
-        }
+            setTours(newArr)}
+
         else {
             router.replace("/", { scroll: false })
             setTours(initialTours)

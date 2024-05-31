@@ -3,10 +3,13 @@
 import $api from "@/api/http";
 import React, { useState } from "react";
 import styles from "./LeftComment.module.scss";
+import { toast } from "react-toastify"
 
 function LeftComment({ tourId, userId }) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
+  const notify = () => toast("Thank you!");
 
   const onLeftComment = async () => {
     try {
@@ -17,12 +20,12 @@ function LeftComment({ tourId, userId }) {
         tourId: Number(tourId),
         userId: Number(userId)
       });
-      alert("Review submitted successfully!");
+      notify()
       setRating(0);
       setComment("");
     } catch (e) {
       console.log(e);
-      alert("Failed to submit review.");
+      toast("You already reviewed!")
     }
   };
 

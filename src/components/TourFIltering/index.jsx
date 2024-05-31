@@ -5,6 +5,7 @@ import Preloader from '../Preloader';
 import { useRouter, useSearchParams } from 'next/navigation';
 import $api from '@/api/http';
 import TourCard from './TourCard';
+import { debounce } from '@/utils/debounce';
 
 function TourFiltering() {
     const [tours, setTours] = useState([]);
@@ -16,12 +17,13 @@ function TourFiltering() {
     const searchParams = useSearchParams();
     const search = searchParams.get("filter");
 
-    const handlePriceChange = (e) => {
-      const newValue = e.target.value;
-      if (newValue === '' || (/^\d+$/.test(newValue) && parseInt(newValue, 10) >= 0)) {
-        setPrice(newValue);
-      }
+    const handlePriceChange = (newValue) => {
+        if (newValue === '' || (/^\d+$/.test(newValue) && parseInt(newValue, 10) >= 0)) {
+            setPrice(newValue);
+        }
     };
+
+    const handlePriceChangeDebounced = debounce(handlePriceChange, 30);
 
     const getTours = async () => {
         setLoading(true);
@@ -56,7 +58,6 @@ function TourFiltering() {
         return matchesLocation && matchesPrice;
     });
 
-    console.log(filteredTours);
 
     if (isLoading) return <Preloader />;
     return (
@@ -66,9 +67,9 @@ function TourFiltering() {
                 <div className={scss.filter}>
                     <input
                         value={price}
-                        onChange={handlePriceChange}
+                        onChange={(e) => handlePriceChangeDebounced(e.target.value)}
                         type="text"
-                        placeholder='Filter by price'
+                        placeholder="Filter by price"
                     />
                     <p className={search == null ? scss.active_title : scss.inactive_title} onClick={() => showAllCriteria()}>All</p>
                     {criterias?.map((el, i) => (
@@ -81,13 +82,13 @@ function TourFiltering() {
                         </p>
                     ))}
                 </div>
-                <div className={scss.tours} style={filteredTours.length == 0 ? {gridTemplateColumns:"1fr"} : null}>
+                <div className={scss.tours} style={filteredTours.length == 0 ? { gridTemplateColumns: "1fr" } : null}>
                     {filteredTours.map((el) => <TourCard key={el.title} {...el} />)}
-                    {filteredTours.length == 0 && 
-                    <div style={{minHeight:"150px", display:"grid", placeItems:"center"}}>
-                        <h1 style={{fontSize:"large" , fontWeight:600}}>Have No tours for this price {price}c</h1>
+                    {filteredTours.length == 0 &&
+                        <div style={{ minHeight: "150px", display: "grid", placeItems: "center" }}>
+                            <h1 style={{ fontSize: "large", fontWeight: 600 }}>Have No tours for this price {price}c</h1>
                         </div>
-                        }
+                    }
                 </div>
             </section>
         </div>

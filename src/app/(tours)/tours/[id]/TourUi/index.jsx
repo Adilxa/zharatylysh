@@ -117,9 +117,9 @@ function TourUi() {
                 <SightsSlider sights={tour?.sights} showArrows={true} />
 
             </div>
-            <PaymentButton price={tour?.price} id={params.id} />
-
-
+            {
+                !isTourBought && <PaymentButton price={tour?.price} id={params.id} />
+            }
             {
                 isTourBought ? <LeftComment tourId={params.id} userId={localStorage.getItem("key")} /> : <FeedBack />
             }

@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 
 function MyTourList({ bookedList }) {
 
-    console.log(bookedList);
 
     const [myBookList, setMyBookList] = useState([])
 
@@ -14,14 +13,17 @@ function MyTourList({ bookedList }) {
     useEffect(() => {
 
         if (bookedList?.length > 0) {
-            let temp = bookedList?.filter((el) => el?.user?.id == localStorage.getItem("key"))
-            setMyBookList(temp)
+            setMyBookList(
+                bookedList?.filter((el) => el?.user?.id == localStorage.getItem("key"))
+            )
         } else if (bookedList == 0) {
             //do something
         }
 
 
-    }, [params , bookedList])
+    }, [params, bookedList])
+
+console.log(myBookList);
 
 
     if (bookedList)
@@ -38,10 +40,10 @@ function MyTourList({ bookedList }) {
                         fontSize: "1.5rem"
                     }}
                 >Your Booked tours</h1>
-                <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "5px" , justifyContent:"space-evenly" }}>
+                <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "5px", justifyContent: "space-evenly" }}>
                     {
                         myBookList.map((el, i) => (
-                            <Bookedcard tour={el.tour} amount={el.amount} key={`${el.id}`} />
+                            <Bookedcard tour={el.tour} amount={el.amount} id={el.id} key={`${el.id}`} />
                         ))
                     }
                 </section>

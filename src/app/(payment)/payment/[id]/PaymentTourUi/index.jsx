@@ -3,7 +3,7 @@
 import $api from '@/api/http';
 import Preloader from '@/components/Preloader';
 import React, { useEffect, useState } from 'react';
-
+import { toast } from 'react-toastify';
 
 function PaymentTourUi({ tour }) {
 
@@ -25,16 +25,19 @@ function PaymentTourUi({ tour }) {
                     amount: tourAmount
                 });
                 if (response.status === 201) {
-                    alert("Success Payment");
+                    toast("Success Payment")
+
                 } else {
+                    toast("Failed to process payment")
+
                     throw new Error("Failed to process payment");
                 }
             }
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                alert("This tour has already been bought");
+                toast("This tour has already been bought")
             } else {
-                alert("An error occurred during the payment process");
+                toast("An error occurred during the payment process")
             }
         }
     };

@@ -7,7 +7,9 @@ const SightsCard = ({ img, title, id }) => {
         <Link href={`/sights/${id}`}>
             <div className={scss.card}>
                 <div className={scss.front}>
-                    <img src={img} alt={title} width={280} height={250} />
+                    <img src={img} alt={title} width={280} height={250}
+                        style={{ minHeight: "300px", maxHeight: "300px" }}
+                    />
                     <div className={scss.btm}>
                         <p>{title}</p>
                     </div>

@@ -1,95 +1,98 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import useAuth from '@/hooks/useAuth';
-import Preloader from '@/components/Preloader';
-import Link from 'next/link';
-import scss from "../signup/SignUp.module.scss"
-import Modal from '@/components/Modal';
-
-function SignUpForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [emailError, setEmailError] = useState("");
-
-    const [modal, setModal] = useState(false)
-
-    const { isLoading, SignUp , isAuth} = useAuth();
-
-    const ROLE = "user";
-
-    const user = {
-        email,
-        password,
-        role: ROLE
-    };
-
-    const validateEmail = (email) => {
-        const regex = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
-        return regex.test(email);
-    };
-
-    const onSubmit = async (e, user) => {
-        e.preventDefault();
-
-        if (!validateEmail(email)) {
-            setEmailError("Please enter a valid Gmail address");
-            return;
-        }
-
-   await SignUp({ ...user });
-
-
-    };
-
-    useEffect(() => {
-
-        
-        if (isAuth) {
-            setModal(!modal)
-        }
-
-        const header = document.getElementById("header");
-        header.style.display = "none";
-
-        return () => {
-            header.style.display = "flex";
-        };
-    }, [isAuth]);
-
-    if (isLoading) return <Preloader />;
-
-    return (
-       <>
-        <form onSubmit={(e) => onSubmit(e, user)}>
-            <h1>Sign Up</h1>
-            <input
-                value={email}
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                    setEmailError("");
-                }}
-            />
-            {emailError && <p className={scss.error}>{emailError}</p>}
-            <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-            />
-            <button>Registration</button>
-            <p>Or if you have an account already click <span><Link href="/signin">here</Link></span></p>
-        </form>
-        <Modal show={modal}>
-            <h1>
-                <b>Zharatylush Taravel</b>
-            </h1>
-                <div>
-                <a href="https://www.google.com/intl/ru/gmail/about/">Confirm your Account</a>
-            <p>you need go to the Gmail and confirm your account</p>
-                </div>
-                
-        </Modal>
-       </>
-    );
-}
-
+"use client"; 
+import React, { useState, useEffect } from 'react'; 
+import useAuth from '@/hooks/useAuth'; 
+import Preloader from '@/components/Preloader'; 
+import Link from 'next/link'; 
+import scss from "../signup/SignUp.module.scss"; 
+ 
+function SignUpForm() { 
+    const [email, setEmail] = useState(""); 
+    const [password, setPassword] = useState(""); 
+    const [country, setCountry] = useState(""); 
+    const [cardNumber, setCardNumber] = useState(""); 
+    const [emailError, setEmailError] = useState(""); 
+    const [formError, setFormError] = useState(""); 
+ 
+    const { isLoading, SignUp } = useAuth(); 
+ 
+    const ROLE = "user"; 
+ 
+    const user = { 
+        email, 
+        password, 
+        country: country, 
+        cardNumber: cardNumber, 
+        role: ROLE 
+    }; 
+ 
+    const validateEmail = (email) => { 
+        const regex = /^[a-zA-Z0-9._%+-]+@gmail.com$/; 
+        return regex.test(email); 
+    }; 
+ 
+    const onSubmit = async (e) => { 
+        e.preventDefault(); 
+        setFormError(""); 
+ 
+        if (!validateEmail(email)) { 
+            setEmailError("Please enter a valid Gmail address"); 
+            return; 
+        } 
+ 
+        try { 
+            const res = await SignUp(user); 
+            console.log("Sign-up successful", res); 
+        } catch (error) { 
+            setFormError("Sign-up failed. Please try again."); 
+            console.error("Error during sign-up", error); 
+        } 
+    }; 
+ 
+    useEffect(() => { 
+        const header = document.getElementById("header"); 
+        if (header) header.style.display = "none"; 
+ 
+        return () => { 
+            if (header) header.style.display = "flex"; 
+        }; 
+    }, []); 
+ 
+    if (isLoading) return <Preloader />; 
+ 
+    return ( 
+        <form onSubmit={onSubmit}> 
+            <h1>Sign Up</h1> 
+            <input 
+                value={email} 
+                onChange={(e) => { 
+                    setEmail(e.target.value); 
+                    setEmailError(""); 
+                }} 
+                type='email' 
+                placeholder='email@' 
+            /> 
+            {emailError && <p className={scss.error}>{emailError}</p>} 
+            <input 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                type="password" 
+                placeholder='password' 
+            /> 
+            <input 
+                value={country} 
+                onChange={(e) => setCountry(e.target.value)} 
+                placeholder='country, city' 
+            /> 
+            <input 
+                value={cardNumber} 
+                onChange={(e) => setCardNumber(e.target.value)} 
+                placeholder='card number' 
+            /> 
+            {formError && <p className={scss.error}>{formError}</p>} 
+            <button>Registration</button> 
+            <p>Or if you have an account already click <span><Link href="/signin">here</Link></span></p> 
+        </form> 
+    ); 
+} 
+ 
 export default SignUpForm;

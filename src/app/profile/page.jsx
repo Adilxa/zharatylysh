@@ -26,7 +26,7 @@ async function Profile() {
                 <SettingsForm />
             </section>
             <section className="container">
-                <MyTourList bookedList={bookedList} />
+                <MyTourList bookedList={bookedList} {...bookedList} />
             </section>
 
 

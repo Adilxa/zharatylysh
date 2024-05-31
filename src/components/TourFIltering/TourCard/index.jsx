@@ -13,7 +13,7 @@ const TourCard = ({
 }) => {
 
     return (
-        <Link href={`tours/` + id}>
+        <Link style={{minWidth:"100%"}} href={`tours/` + id}>
             <div className={scss.card}>
                 <div className={scss.days}>
                     <p className={scss.days_title}>{price}c</p>
@@ -25,7 +25,7 @@ const TourCard = ({
                         src={img}
                         alt="background-image"
                         height={280}
-                        style={{ minHeight: "220px" }}
+                        style={{ minHeight: "220px", maxHeight:"220px"  }}
                     />
                     <div className={scss.bottomContent}>
                         <div className={scss.textContainer}>
