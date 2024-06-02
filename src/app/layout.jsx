@@ -1,11 +1,14 @@
+"use client"
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "300", "100", "700"],
@@ -14,7 +17,7 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
 });
 
-
+const stripePromise = loadStripe('pk_test_51PMkfuBW0LwhajamdUs4Ih8OBBuqDXta6FmWUSfllgbf3qjNOWU6JIHi4cX3kVAkwsj7CRAkDluRYHJJ2aDKmnok00eHJPLw9B');
 
 export default function RootLayout({ children }) {
   return (
@@ -27,10 +30,13 @@ export default function RootLayout({ children }) {
       </Head>
       <body className={montserrat.className}>
         <Header />
-        {children}
+        <Elements stripe={stripePromise}>
+          {children}
+        </Elements>
         <ToastContainer />
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-3S6ZYM7VP6"/>
     </html>
   );
 }
