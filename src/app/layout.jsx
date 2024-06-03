@@ -17,7 +17,7 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
 });
 
-const stripePromise = loadStripe('pk_test_51PMkfuBW0LwhajamdUs4Ih8OBBuqDXta6FmWUSfllgbf3qjNOWU6JIHi4cX3kVAkwsj7CRAkDluRYHJJ2aDKmnok00eHJPLw9B');
+const stripePromise = loadStripe('pk_test_51PMo1eRqpnAZ2sir18TKB5l99sur4tjWAcxiJoICRtYWf8GEayQqifiqgf4TiPm7ZVaEX9wPPeiyEYmlYDkRHOtY00BZnPr79H');
 
 export default function RootLayout({ children }) {
   return (
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
         <ToastContainer />
         <Footer />
       </body>
-      <GoogleAnalytics gaId="G-3S6ZYM7VP6"/>
+      <GoogleAnalytics gaId="G-3S6ZYM7VP6" />
     </html>
   );
 }

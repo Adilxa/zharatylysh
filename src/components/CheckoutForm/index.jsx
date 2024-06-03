@@ -3,12 +3,15 @@
 import { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import $api from '@/api/http';
+import { toast } from 'react-toastify';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ id, amount, tour }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [payBtn, setPayBtn] = useState(true)
 
   const handlePayment = async () => {
     setIsLoading(true);
@@ -35,17 +38,15 @@ const CheckoutForm = () => {
       }
 
       // Create a PaymentIntent
-      const response = await axios.post("https://skihub-server-production.up.railway.app/api/booked-product/create", {
-        currency: "usd",
-        isRefund: false,
-        endDate: "2024-10-12",
-        amount: 5,
-        product: 2
-      }, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicGhvbmVOdW1iZXIiOiIwNzA2NjY0ODA1IiwiaWF0IjoxNzE3MzQxMTU5LCJleHAiOjE3MTgyMDUxNTl9.fdko339tC_jG5amxCE_fUJGx4AtbJ3SJ_crtgqfdFw0`,
-          'Content-Type': 'application/json' // Убедитесь, что тип содержимого установлен правильно
-        }
+      const response = await $api.post("/booked-tour", {
+        // currency: "usd",
+        // isRefund: false,
+        // endDate: "2024-10-12",
+        // amount: amount,
+        // product: id,
+        amount: amount,
+        tour: id,
+        user: Number(localStorage.getItem("key"))
       });
 
       const { paymentIntentClientSecret } = response.data;
@@ -58,24 +59,35 @@ const CheckoutForm = () => {
       if (confirmError) {
         setErrorMessage(confirmError.message);
       } else {
-        console.log('PaymentIntent:', paymentIntent);
+        toast("Success payed!")
+        setPayBtn(false)
         // Платеж успешно завершен
       }
     } catch (error) {
       setErrorMessage(error.message);
+      setPayBtn(false)
+      toast.error("This tour is already bougth")
+
     }
 
     setIsLoading(false);
   };
 
+  const onPay = (e) => {
+    e.preventDefault();
+    handlePayment();
+  }
+
   return (
     <>
-      <form onSubmit={(e) => { e.preventDefault(); handlePayment(); }}>
+      <form style={{ width: "250px", display: "flex", flexDirection: "column", gap: "10px" }} onSubmit={(e) => { payBtn ? onPay(e) : e.preventDefault() }}>
         <CardElement />
-        <button type="submit" disabled={!stripe || isLoading}>
+        <button
+          className={payBtn ? "bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50" : "bg-gray-300 text-white px-4 py-2 rounded"}
+          type="submit" disabled={!stripe || isLoading}>
           {isLoading ? 'Processing...' : 'Pay'}
         </button>
-        {errorMessage && <div>{errorMessage}</div>}
+        {/* {errorMessage && <div>This tour is already bougth</div>} */}
       </form>
     </>
   );

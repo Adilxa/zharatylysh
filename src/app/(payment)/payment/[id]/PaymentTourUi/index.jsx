@@ -4,6 +4,7 @@ import $api from '@/api/http';
 import Preloader from '@/components/Preloader';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import CheckoutForm from '@/components/CheckoutForm';
 
 function PaymentTourUi({ tour }) {
 
@@ -115,7 +116,7 @@ function PaymentTourUi({ tour }) {
                             +1
                         </button>
                     </div>
-                    <button
+                    {/* <button
                         onClick={onPay}
                         className={`bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50`}
                         style={{
@@ -130,9 +131,11 @@ function PaymentTourUi({ tour }) {
                         }}
                     >
                         Pay Now
-                    </button>
+                    </button> */}
 
-
+                    <main>
+                        <CheckoutForm tour={tour} id={tour.id} amount={tourAmount} />
+                    </main>
                 </div>
             </section>
         </section>

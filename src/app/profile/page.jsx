@@ -5,10 +5,10 @@ import MyTourList from "./MyToursList";
 import $api from "@/api/http";
 
 async function getMyBooked() {
-    try{
+    try {
         const res = await $api.get(`/booked-tour`)
-        return res?.data
-    }catch(e) {
+        return res.data
+    } catch (e) {
         return 0
     }
 }

@@ -43,18 +43,19 @@ function EditBookedCard() {
     }, [])
 
     const onSave = async () => {
-       try{
-        await $api.put("booked-tour/" + params.id, { ...bookedTour, amount: tourAmount })
-        await $api.put("tour/" + bookedTour.tour.id, { ...bookedTour.tour.id, amount: tourAmountLeft })
-        toast("Good ")
-       }catch(e){
-        console.log(e);
-       }
+        try {
+            await $api.put("booked-tour/" + params.id, { ...bookedTour, amount: tourAmount })
+            await $api.put("tour/" + bookedTour.tour.id, { ...bookedTour.tour.id, amount: tourAmountLeft })
+            toast("Good succes add places")
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     if (isLoading) return <Preloader />
     return (
-        <section className={` container`} style={{ margin: "7% auto" }}>
+        <section className={` container`} style={{ margin: "9% auto" }}>
+            <img style={{ width: "100%", minHeight: "20%" }} src={bookedTour.tour.img} alt="" />
             <div className="mt-5 flex justify-between">
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                     <button

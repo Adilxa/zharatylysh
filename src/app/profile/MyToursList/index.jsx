@@ -8,7 +8,6 @@ function MyTourList({ bookedList }) {
 
     const [myBookList, setMyBookList] = useState([])
 
-    const params = useParams()
 
     useEffect(() => {
 
@@ -21,9 +20,9 @@ function MyTourList({ bookedList }) {
         }
 
 
-    }, [params, bookedList])
+    }, [bookedList])
 
-console.log(myBookList);
+    console.log(bookedList);
 
 
     if (bookedList)
