@@ -2,30 +2,43 @@
 import React, { useEffect, useState } from "react";
 import Bookedcard from "./BookedCard";
 import { useParams } from "next/navigation";
+import $api from "@/api/http";
 
-function MyTourList({ bookedList }) {
-
+function MyTourList() {
 
     const [myBookList, setMyBookList] = useState([])
 
 
+    const getBookedTour = async () => {
+        try {
+            const res = await $api.get("/booked-tour")
+            setMyBookList(res?.data)
+            return res?.data
+        } catch (e) {
+            return e
+        }
+    }
+
+
     useEffect(() => {
 
-        if (bookedList?.length > 0) {
+        getBookedTour()
+
+        if (myBookList?.length > 0) {
             setMyBookList(
-                bookedList?.filter((el) => el?.user?.id == localStorage.getItem("key"))
+                myBookList?.filter((el) => el?.user?.id == localStorage.getItem("key"))
             )
-        } else if (bookedList == 0) {
+        } else if (myBookList == 0) {
             //do something
         }
 
 
-    }, [bookedList])
+    }, [])
 
-    console.log(bookedList);
+    console.log(myBookList);
 
 
-    if (bookedList)
+    if (myBookList)
         return (
 
             <>

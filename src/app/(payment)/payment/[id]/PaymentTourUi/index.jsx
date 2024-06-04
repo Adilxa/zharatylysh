@@ -20,7 +20,7 @@ function PaymentTourUi({ tour }) {
         try {
             if (tourAmount > 0) {
                 const response = await $api.post("booked-tour", {
-                    sum: Number(((tour.price + tour.price * 0.002) * tourAmount).toFixed(0)),
+                    sum: Number(((tour.price + tour.price * 0.029) * tourAmount).toFixed(0)),
                     user: Number(localStorage.getItem("key")),
                     tour: tour.id,
                     amount: tourAmount
@@ -72,7 +72,7 @@ function PaymentTourUi({ tour }) {
 
                     <div className="flex justify-between items-center mt-2">
                         <p className="text-lg font-semibold">Total Price:</p>
-                        <p className="text-lg font-semibold">{((tour.price + tour.price * 0.002) * tourAmount).toFixed(2)}c</p>
+                        <p className="text-lg font-semibold">{(tour.price + tour.price * 0.029).toFixed(2)}c</p>
                     </div>
                 </div>
                 <div className="mt-5 flex justify-between">
