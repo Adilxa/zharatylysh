@@ -43,7 +43,6 @@ function TourUi() {
             })
     }
 
-    console.log(isTourBought);
 
     const [tour, setTour] = useState(null)
     const [isLoading, setLoading] = useState(false)
@@ -67,6 +66,8 @@ function TourUi() {
         getTour()
         getTourBought()
     }, [])
+
+    console.log(tour?.sights);
 
 
     if (isLoading) return <Preloader />
@@ -114,11 +115,16 @@ function TourUi() {
                         Sights visited on this tour
                     </h1>
                 </div>
-                <SightsSlider sights={tour?.sights} showArrows={true} />
-
+                {
+                    tour?.sights.length != 0 ? <SightsSlider sights={tour?.sights} showArrows={true} />
+                        :
+                        <section className='container bg-gray-200 my-3 flex justify-center items-center h-32'>
+                            <h5 className='text-gray-500 font-bold'>No Sights for This Tour Yet</h5>
+                        </section>
+                }
             </div>
             {
-                !isTourBought && <PaymentButton price={tour?.price} id={params.id} />
+                !isTourBought && localStorage?.getItem("key") && <PaymentButton price={tour?.price} id={params.id} />
             }
             {
                 isTourBought ? <LeftComment tourId={params.id} userId={localStorage.getItem("key")} /> : <FeedBack />

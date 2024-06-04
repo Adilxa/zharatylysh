@@ -11,7 +11,7 @@ function SightUi({ sight }) {
     return (
         <>
             <div className={scss.main} style={{ backgroundImage: `url(${sight.img})` }}>
-                <h1 className={scss.title}>{sight.description}</h1>
+                <h1 className={scss.title}>{sight.title}</h1>
                 <div className={scss.container}>
                     <button>Create your tour</button>
                     <button>Watch video</button>
