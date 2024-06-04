@@ -61,7 +61,7 @@ const Footer = () => {
             <footer className={`${scss.footer} container`}>{render}</footer >
             <div className={scss.underFooter}>
                 <p className={scss.rights}>@ 2024 Zharatylysh Travel. All rights reserved</p>
-                <p>Created by @Adilxann</p>
+                <p>Created by @Adilet</p>
             </div>
         </>
     );

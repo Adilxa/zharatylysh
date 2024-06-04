@@ -8,6 +8,7 @@ import SightsSlider from '@/components/SightsSlider';
 import PaymentButton from '@/components/Payment';
 import FeedBack from '@/components/FeedBack';
 import LeftComment from '@/components/leftComment';
+import Link from 'next/link';
 
 function TourUi() {
 
@@ -76,9 +77,13 @@ function TourUi() {
             <div style={{ backgroundImage: `url(${tour?.img})` }} className={scss.main}>
                 <h1 className={scss.title}>{tour?.title}</h1>
                 <div className={scss.container}>
-                    <button>Create your tour</button>
-                    <button>Watch video</button>
-                    <button>Find tours</button>
+                    <button>
+                        <a href="https://www.youtube.com/watch?v=Ywax-BGPJRw" target='_blank' rel='noreferrer'
+                            style={{ display: "block", width: "100%", textAlign: "center" }}>Watch video</a>
+                    </button>
+                    <button>
+                        <Link href="/tours" style={{ display: "block", width: "100%", textAlign: "center" }}>Find tours</Link>
+                    </button>
                 </div>
             </div>
             <section className='container' style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
